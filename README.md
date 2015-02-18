@@ -21,42 +21,25 @@ app root. Just add the plyugin name to the `appPlugins` key.
     "kalabox-plugin-pressflow7-env",
     "kalabox-plugin-git"
   ],
-  "appComponents": {
-    "data": {
-      "image": {
-        "name": "kalabox/data:stable"
-      }
-    },
-    "db": {
-      "image": {
-        "name": "kalabox/mariadb",
-        "build": true,
-        "src": "dockerfiles/kalabox/mariadb"
-      }
-    },
-    "php": {
-      "image": {
-        "name": "pressflow7/php-fpm",
-        "build": true,
-        "src": "dockerfiles/pressflow7/php-fpm"
-      }
-    },
-    "web": {
-      "image": {
-        "name": "pressflow7/nginx",
-        "build": true,
-        "src": "dockerfiles/pressflow7/nginx"
-      },
-      "proxy": [
-        {
-          "port": "80/tcp",
-          "default": true
-        }
-      ]
-    }
-  }
 }
 
+```
+
+## Usage
+
+Run any git command you normally would but start it with `kbox`. Run it from the directory that contains the app you want to run it against or pass in the appname.
+
+Examples
+
+```
+# Returns the version of git, must run from a directory that contains a kalabox app 
+kbox git version
+
+# Clones a repo into /data for the pressflow app
+kbox pressflow7 git clone http://github.com/kalamuna/playbox.git ./
+
+# Pulls down the latest code, must run from a directory that contains a kalabox app
+kbox git pull
 ```
 
 ## Other Resources
