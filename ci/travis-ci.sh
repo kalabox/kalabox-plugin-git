@@ -16,7 +16,7 @@ before-install() {
   if ([ $TRAVIS_BRANCH == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
     [ $TRAVIS_PULL_REQUEST == "false" ] &&
     [ $TRAVIS_REPO_SLUG == "kalabox/kalabox-plugin-git" ]; then
-      openssl aes-256-cbc -K $encrypted_dd11ce1f2e12_key -iv $encrypted_dd11ce1f2e12_iv -in ci/travis.id_rsa.enc -out $HOME/.ssh/travis.id_rsa -dS
+      openssl aes-256-cbc -K $encrypted_dd11ce1f2e12_key -iv $encrypted_dd11ce1f2e12_iv -in ci/travis.id_rsa.enc -out $HOME/.ssh/travis.id_rsa -d
   fi
 }
 
