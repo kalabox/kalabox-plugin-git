@@ -1,13 +1,13 @@
-# Kalabox Plugin Util
+# Kalabox Plugin Git
 
-A simple plugin adding some basic server utility commands like git and rsync.
+A simple plugin to add git commands to your apps.
 
 ## Installation
 
 You can install this plugin by going into your app directory and running the normal
 
 ```
-npm install kalabox-plugin-util --save
+npm install kalabox-plugin-git --save
 ```
 
 In order for your app to use the plugin you will also need to info the app of its existence. This can be done in the `kalabox.json` file in your
@@ -19,7 +19,7 @@ app root. Just add the plyugin name to the `appPlugins` key.
   "appPlugins": [
     "my-hot-plugin",
     "kalabox-plugin-pressflow7-env",
-    "kalabox-plugin-util"
+    "kalabox-plugin-git"
   ],
   "appComponents": {
     "data": {

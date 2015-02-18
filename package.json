@@ -1,19 +1,19 @@
 {
-  "name": "kalabox-plugin-util",
-  "description": "A simple plugin adding some basic server utility commands like git and rsync.",
+  "name": "kalabox-plugin-git",
+  "description": "A simple plugin to add git commands to your apps.",
   "keywords": [
     "docker",
     "kalabox",
     "drupal"
   ],
-  "version": "0.3.1",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kalabox/kalabox-plugin-util"
+    "url": "https://github.com/kalabox/kalabox-plugin-git"
   },
   "bugs": {
     "email": "mike@kalamuna.com",
-    "url": "http://github.com/kalabox/kalabox-plugin-util"
+    "url": "http://github.com/kalabox/kalabox-plugin-git"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
