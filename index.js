@@ -30,14 +30,6 @@ module.exports = function(argv, app, events, engine, tasks) {
    * Runs a git command on the app data container
    **/
   var runGitCMD = function(cmd, done) {
-    // @todo: needs to come from a DEEPER PLACE
-    var home = app.config.home;
-    if (process.platform === 'win32') {
-      home = app.config.home.replace(/\\/g, '/').replace('C:/', '/c/');
-    }
-    else if (process.platform === 'linux')  {
-      home = app.config.home.replace('/home', '/Users');
-    }
     engine.run(
       'kalabox/git:stable',
       cmd,
@@ -52,7 +44,7 @@ module.exports = function(argv, app, events, engine, tasks) {
         }
       },
       {
-        Binds: [path.join(home, '.ssh') + ':/ssh:rw']
+        Binds: [app.config.homeBind + ':/ssh:rw']
       },
       done
     );
