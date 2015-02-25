@@ -1,6 +1,6 @@
 # Kalabox Plugin Git
 
-A simple plugin to add git commands to your apps.
+A simple plugin to let you run git commands on your apps. This plugin will also forward in and load your ssh key so you can pull code that is key-protected.
 
 ## Installation
 
@@ -10,8 +10,7 @@ You can install this plugin by going into your app directory and running the nor
 npm install kalabox-plugin-git --save
 ```
 
-In order for your app to use the plugin you will also need to info the app of its existence. This can be done in the `kalabox.json` file in your
-app root. Just add the plyugin name to the `appPlugins` key.
+In order for your app to use the plugin you will also need to inform the app of its existence. This can be done in the `kalabox.json` file in your app root. Just add the plugin name to the `appPlugins` key.
 
 ```json
 {
@@ -35,7 +34,7 @@ Examples
 # Returns the version of git, must run from a directory that contains a kalabox app 
 kbox git version
 
-# Clones a repo into /data for the pressflow app
+# Clones a repo into /data for a D7 app
 kbox pressflow7 git clone http://github.com/kalamuna/playbox.git ./
 
 # Pulls down the latest code, must run from a directory that contains a kalabox app
