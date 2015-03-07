@@ -33,7 +33,6 @@ module.exports = function(argv, app, events, engine, tasks) {
     engine.run(
       'kalabox/git:stable',
       cmd,
-      process.stdout,
       {
         Env: [
           'APPNAME=' +  app.name,
