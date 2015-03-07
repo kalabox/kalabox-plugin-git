@@ -16,7 +16,8 @@ module.exports = function(argv, app, events, engine, tasks) {
 
     for (var opt in argv) {
       if (argv[opt] === true) {
-        cmd.push('--' + opt);
+        var flag = (opt.length === 1) ? '-' : '--';
+        cmd.push(flag + opt);
       }
       else {
         cmd.push('--' + opt + '=' + argv[opt]);
