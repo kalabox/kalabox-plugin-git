@@ -11,6 +11,7 @@ RUN \
 
 COPY kgit /usr/local/bin/kgit
 COPY ssh-config /root/.ssh/config
+COPY gitconfig /root/.gitconfig
 
 RUN chmod +x /usr/local/bin/kgit
 

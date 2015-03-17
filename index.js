@@ -2,7 +2,7 @@
 
 var path = require('path');
 
-module.exports = function(argv, app, events, engine, tasks) {
+module.exports = function(argv, app, events, engine, globalConfig, tasks) {
 
   // Helpers
   /**
@@ -31,13 +31,16 @@ module.exports = function(argv, app, events, engine, tasks) {
    * Runs a git command on the app data container
    **/
   var runGitCMD = function(cmd, done) {
+    var gitUser =
+      (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
     engine.run(
       'kalabox/git:stable',
       cmd,
       {
         Env: [
           'APPNAME=' +  app.name,
-          'APPDOMAIN=' +  app.domain
+          'APPDOMAIN=' +  app.domain,
+          'GITUSER=' + gitUser
         ],
         HostConfig: {
           VolumesFrom: [app.dataContainerName]
@@ -53,7 +56,17 @@ module.exports = function(argv, app, events, engine, tasks) {
   // Events
   // Install the util container for our things
   events.on('post-install', function(app, done) {
-    engine.build({name: 'kalabox/git:stable'}, done);
+    // If profile is set to dev build from source
+    var opts = {
+      name: 'kalabox/git:stable',
+      build: false,
+      src: ''
+    };
+    if (globalConfig.profile === 'dev') {
+      opts.build = true;
+      opts.src = path.resolve(__dirname, 'dockerfiles', 'git', 'Dockerfile');
+    }
+    engine.build(opts, done);
   });
 
   // Tasks
