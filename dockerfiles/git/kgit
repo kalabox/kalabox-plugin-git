@@ -15,7 +15,7 @@ eval `ssh-agent -s` > /dev/null
 ssh-add /ssh/.ssh/id_rsa > /dev/null
 
 git config --global user.name "$GITUSER"
-git config --global user.email $GITUSER@kalabox2
+git config --global user.email $GITEMAIL
 
 git "$@"
 

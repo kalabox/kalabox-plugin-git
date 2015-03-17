@@ -2,6 +2,8 @@
 
 var path = require('path');
 
+var PLUGIN_NAME = 'kalabox-plugin-git';
+
 module.exports = function(argv, app, events, engine, globalConfig, tasks) {
 
   // Helpers
@@ -23,16 +25,40 @@ module.exports = function(argv, app, events, engine, globalConfig, tasks) {
         cmd.push('--' + opt + '=' + argv[opt]);
       }
     }
-
     return cmd;
+  };
+
+    // Helpers
+  /**
+   * Gets plugin conf from the appconfig or from CLI arg
+   **/
+  var getOpts = function() {
+    // Grab our options from config
+    var opts = app.config.pluginConf[PLUGIN_NAME];
+    // Override any config coming in on the CLI
+    for (var key in opts) {
+      if (argv[key]) {
+        opts[key] = argv[key];
+      }
+    }
+    return opts;
   };
 
   /**
    * Runs a git command on the app data container
    **/
   var runGitCMD = function(cmd, done) {
-    var gitUser =
-      (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
+    var opts = getOpts();
+    var gitUser;
+    if (opts['git-username']) {
+      gitUser = opts['git-username'];
+    }
+    else {
+      gitUser = (process.platform === 'win32') ?
+        process.env.USERNAME : process.env.USER;
+    }
+    var gitEmail = (opts['git-email']) ? opts['git-email'] : gitUser + '@kbox';
+
     engine.run(
       'kalabox/git:stable',
       cmd,
@@ -40,7 +66,8 @@ module.exports = function(argv, app, events, engine, globalConfig, tasks) {
         Env: [
           'APPNAME=' +  app.name,
           'APPDOMAIN=' +  app.domain,
-          'GITUSER=' + gitUser
+          'GITUSER=' + gitUser,
+          'GITEMAIL=' + gitEmail
         ],
         HostConfig: {
           VolumesFrom: [app.dataContainerName]

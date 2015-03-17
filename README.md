@@ -31,7 +31,7 @@ Run any git command you normally would but start it with `kbox`. Run it from the
 Examples
 
 ```
-# Returns the version of git, must run from a directory that contains a kalabox app 
+# Returns the version of git, must run from a directory that contains a kalabox app
 kbox git version
 
 # Clones a repo into /data for a D7 app
@@ -39,6 +39,17 @@ kbox pressflow7 git clone http://github.com/kalamuna/playbox.git ./
 
 # Pulls down the latest code, must run from a directory that contains a kalabox app
 kbox git pull
+```
+
+## Configuration
+
+In your apps kalabox.json add the following to the pluginConf key to set the username and email that will be applied to your git commits
+
+```json
+    "kalabox-plugin-git": {
+      "git-username": "William T. Riker",
+      "git-email": "risalover1701@usstitan.mil"
+    },
 ```
 
 ## Other Resources
