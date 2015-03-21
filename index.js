@@ -4,7 +4,12 @@ var path = require('path');
 
 var PLUGIN_NAME = 'kalabox-plugin-git';
 
-module.exports = function(argv, app, events, engine, globalConfig, tasks) {
+module.exports = function(kbox, app) {
+  var argv = kbox.core.deps.lookup('argv');
+  var events = kbox.core.events;
+  var engine = kbox.engine;
+  var globalConfig = kbox.core.deps.lookup('globalConfig');
+  var tasks = kbox.core.tasks;
 
   // Helpers
   /**
