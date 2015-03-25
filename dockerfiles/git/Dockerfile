@@ -4,7 +4,7 @@ FROM kalabox/debian:stable
 
 RUN \
   apt-get update && \
-  apt-get install -y git-core && \
+  apt-get install -y git-core nano && \
   apt-get clean -y && \
   mkdir -p /usr/local/bin && \
   mkdir -p /root/.ssh
