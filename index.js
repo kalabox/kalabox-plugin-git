@@ -10,7 +10,6 @@ module.exports = function(kbox) {
   var events = kbox.core.events;
   var engine = kbox.engine;
   var globalConfig = kbox.core.deps.lookup('globalConfig');
-  var tasks = kbox.core.tasks;
 
   kbox.whenApp(function(app) {
 
@@ -107,11 +106,16 @@ module.exports = function(kbox) {
 
     // Tasks
     // git wrapper: kbox git COMMAND
-    tasks.registerTask([app.name, 'git'], function(done) {
-      // We need to use this faux bin until the resolution of
-      // https://github.com/syncthing/syncthing/issues/1056
-      var cmd = getCmd();
-      runGitCMD(cmd, done);
+    kbox.tasks.add(function(task) {
+      task.path = [app.name, 'git'];
+      task.description = 'Run git commands.';
+      task.allowArgv = true;
+      task.func = function(done) {
+        // We need to use this faux bin until the resolution of
+        // https://github.com/syncthing/syncthing/issues/1056
+        var cmd = getCmd();
+        runGitCMD(cmd, done);
+      };
     });
 
   });
