@@ -1,13 +1,12 @@
 'use strict';
 
 var path = require('path');
+var _ = require('lodash');
+var yargs = require('yargs');
 
 var PLUGIN_NAME = 'kalabox-plugin-git';
 
 module.exports = function(kbox) {
-
-  var _ = require('lodash');
-  var yargs = require('yargs');
 
   var events = kbox.core.events;
   var engine = kbox.engine;
