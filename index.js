@@ -2,7 +2,6 @@
 
 var path = require('path');
 var _ = require('lodash');
-var yargs = require('yargs');
 
 var PLUGIN_NAME = 'kalabox-plugin-git';
 
@@ -18,8 +17,7 @@ module.exports = function(kbox) {
     /**
      * Gets plugin conf from the appconfig or from CLI arg
      **/
-    var getOpts = function(argv) {
-      var options = yargs.parse(argv);
+    var getOpts = function(options) {
       var defaults = app.config.pluginConf[PLUGIN_NAME];
       _.each(Object.keys(defaults), function(key) {
         if (_.has(options, key)) {
@@ -32,9 +30,9 @@ module.exports = function(kbox) {
     /**
      * Runs a git command on the app data container
      **/
-    var runGitCMD = function(argv, done) {
-      var cmd = argv;
-      var opts = getOpts(argv);
+    var runGitCMD = function(payload, options, done) {
+      var cmd = payload;
+      var opts = getOpts(options);
       var gitUser;
       if (opts['git-username']) {
         gitUser = opts['git-username'];
@@ -92,7 +90,7 @@ module.exports = function(kbox) {
       task.func = function(done) {
         // We need to use this faux bin until the resolution of
         // https://github.com/syncthing/syncthing/issues/1056
-        runGitCMD(this.argv, done);
+        runGitCMD(this.payload, this.options, done);
       };
     });
 
