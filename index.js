@@ -45,7 +45,7 @@ module.exports = function(kbox) {
         (opts['git-email']) ? opts['git-email'] : gitUser + '@kbox';
 
       engine.run(
-        'kalabox/git:stable',
+        'git',
         cmd,
         {
           Env: [
