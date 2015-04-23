@@ -68,16 +68,10 @@ module.exports = function(kbox) {
     // Events
     // Install the util container for our things
     events.on('post-install', function(app, done) {
-      // If profile is set to dev build from source
       var opts = {
-        name: 'kalabox/git:stable',
-        build: false,
-        src: ''
+        name: 'git',
+        srcRoot = path.resolve(__dirname)
       };
-      if (globalConfig.profile === 'dev') {
-        opts.build = true;
-        opts.src = path.resolve(__dirname, 'dockerfiles', 'git', 'Dockerfile');
-      }
       engine.build(opts, done);
     });
 
