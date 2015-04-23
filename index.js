@@ -70,7 +70,7 @@ module.exports = function(kbox) {
     events.on('post-install', function(app, done) {
       var opts = {
         name: 'git',
-        srcRoot = path.resolve(__dirname)
+        srcRoot: path.resolve(__dirname)
       };
       engine.build(opts, done);
     });
