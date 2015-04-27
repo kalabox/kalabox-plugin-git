@@ -1,6 +1,6 @@
 'use strict';
 
-var taskOpts = require('./tasks')
+var taskOpts = require('./tasks');
 
 module.exports = function(kbox, appName) {
 
