@@ -2,7 +2,7 @@
 
 var path = require('path');
 var _ = require('lodash');
-
+var taskOpts = require('./tasks.js');
 var PLUGIN_NAME = 'kalabox-plugin-git';
 
 module.exports = function(kbox) {
@@ -18,9 +18,10 @@ module.exports = function(kbox) {
      * Gets plugin conf from the appconfig or from CLI arg
      **/
     var getOpts = function(options) {
+      // Override kalabox.json options with command line args
       var defaults = app.config.pluginConf[PLUGIN_NAME];
       _.each(Object.keys(defaults), function(key) {
-        if (_.has(options, key)) {
+        if (_.has(options, key) && options[key]) {
           defaults[key] = options[key];
         }
       });
@@ -44,10 +45,23 @@ module.exports = function(kbox) {
       var gitEmail =
         (opts['git-email']) ? opts['git-email'] : gitUser + '@kbox';
 
+      // Run the git command in the correct directory in the container if the
+      // user is somewhere inside the code directory on the host side.
+      // @todo: consider if this is better in the actual engine.run command
+      // vs here.
+      var workingDirExtra;
+      var cwd = process.cwd();
+      var codeRoot = app.config.codeRoot;
+      if (_.startsWith(cwd, codeRoot)) {
+        workingDirExtra = cwd.replace(codeRoot, '');
+      }
+      var workingDir = '/data' + workingDirExtra;
+
       engine.run(
         'git',
         cmd,
         {
+          WorkingDir: workingDir,
           Env: [
             'APPNAME=' +  app.name,
             'APPDOMAIN=' +  app.domain,
@@ -81,6 +95,8 @@ module.exports = function(kbox) {
       task.path = [app.name, 'git'];
       task.description = 'Run git commands.';
       task.kind = 'delegate';
+      task.options.push(taskOpts.gitUsername);
+      task.options.push(taskOpts.gitEmail);
       task.func = function(done) {
         // We need to use this faux bin until the resolution of
         // https://github.com/syncthing/syncthing/issues/1056

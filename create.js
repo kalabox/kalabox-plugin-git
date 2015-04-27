@@ -1,18 +1,16 @@
 'use strict';
 
-module.exports = function(kbox) {
+var taskOpts = require('./tasks')
+
+module.exports = function(kbox, appName) {
 
   var deps = kbox.core.deps;
 
   // Add an option
-  kbox.create.add('drupal7', {
+  kbox.create.add(appName, {
     option: {
       name: 'git-username',
-      task: {
-        name: 'git-username',
-        kind: 'string',
-        description: 'Your git username.',
-      },
+      task: taskOpts.gitUsername,
       properties: {
         message: 'Git username'.green,
         required: true,
@@ -29,14 +27,10 @@ module.exports = function(kbox) {
   });
 
   // Add an option
-  kbox.create.add('drupal7', {
+  kbox.create.add(appName, {
     option: {
       name: 'git-email',
-      task: {
-        name: 'git-email',
-        kind: 'string',
-        description: 'Your git email.',
-      },
+      task: taskOpts.gitEmail,
       properties: {
         message: 'Git email'.green,
         required: true,
