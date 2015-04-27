@@ -49,7 +49,7 @@ module.exports = function(kbox) {
       // user is somewhere inside the code directory on the host side.
       // @todo: consider if this is better in the actual engine.run command
       // vs here.
-      var workingDirExtra;
+      var workingDirExtra = '';
       var cwd = process.cwd();
       var codeRoot = app.config.codeRoot;
       if (_.startsWith(cwd, codeRoot)) {
