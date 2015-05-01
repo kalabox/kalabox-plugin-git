@@ -15,5 +15,4 @@ COPY gitconfig /root/.gitconfig
 
 RUN chmod +x /usr/local/bin/kgit
 
-WORKDIR /data
 ENTRYPOINT ["/usr/local/bin/kgit"]

@@ -2,12 +2,14 @@
 
 # We need to use this fauxbin until the resolution of
 # https://github.com/syncthing/syncthing/issues/1056
-if [ -f "/data/.stfolder" ]; then
-  mv /data/.stfolder /tmp/.stfolder
+#
+
+if [ -f "/${CODEDIR}/.stfolder" ]; then
+  mv /${CODEDIR}/.stfolder /tmp/.stfolder
 fi
 
-if [ -f "/data/.stignore" ]; then
-  mv /data/.stignore /tmp/.stignore
+if [ -f "/${CODEDIR}/.stignore" ]; then
+  mv /${CODEDIR}/.stignore /tmp/.stignore
 fi
 
 # We need to do this for SSH add now as well
@@ -21,10 +23,10 @@ git "$@"
 
 # Move this back
 if [ -f "/tmp/.stfolder" ]; then
-  mv /tmp/.stfolder /data/.stfolder
+  mv /tmp/.stfolder /${CODEDIR}/.stfolder
 fi
 
 # Move this back
 if [ -f "/tmp/.stignore" ]; then
-  mv /tmp/.stignore /data/.stignore
+  mv /tmp/.stignore /${CODEDIR}/.stignore
 fi

@@ -55,14 +55,16 @@ module.exports = function(kbox) {
       if (_.startsWith(cwd, codeRoot)) {
         workingDirExtra = cwd.replace(codeRoot, '');
       }
-      var workingDir = '/data' + workingDirExtra;
+      var codeDir = globalConfig.codeDir;
+      var workingDir = '/' + codeDir + workingDirExtra;
 
       engine.run(
-        'git',
+        'kalabox/git:dev',
         cmd,
         {
           WorkingDir: workingDir,
           Env: [
+            'CODEDIR=' + codeDir,
             'APPNAME=' +  app.name,
             'APPDOMAIN=' +  app.domain,
             'GITUSER=' + gitUser,
@@ -83,7 +85,7 @@ module.exports = function(kbox) {
     // Install the util container for our things
     events.on('post-install', function(app, done) {
       var opts = {
-        name: 'git',
+        name: 'kalabox/git:dev',
         srcRoot: path.resolve(__dirname)
       };
       engine.build(opts, done);
