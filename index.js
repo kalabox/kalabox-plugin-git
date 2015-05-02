@@ -64,9 +64,6 @@ module.exports = function(kbox) {
         {
           WorkingDir: workingDir,
           Env: [
-            'CODEDIR=' + codeDir,
-            'APPNAME=' +  app.name,
-            'APPDOMAIN=' +  app.domain,
             'GITUSER=' + gitUser,
             'GITEMAIL=' + gitEmail
           ],

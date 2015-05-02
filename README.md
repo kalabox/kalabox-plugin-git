@@ -34,7 +34,7 @@ Examples
 # Returns the version of git, must run from a directory that contains a kalabox app
 kbox git version
 
-# Clones a repo into codeDir or CWD if you are inside codeDir for a D7 app
+# Clones a repo into /code for a D7 app
 kbox pressflow7 git clone http://github.com/kalamuna/playbox.git ./
 
 # Pulls down the latest code, must run from a directory that contains a kalabox app
