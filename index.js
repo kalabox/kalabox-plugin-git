@@ -59,7 +59,7 @@ module.exports = function(kbox) {
       var workingDir = '/' + codeDir + workingDirExtra;
 
       engine.run(
-        'kalabox/git:dev',
+        'git',
         cmd,
         {
           WorkingDir: workingDir,
@@ -82,7 +82,7 @@ module.exports = function(kbox) {
     // Install the util container for our things
     events.on('post-install', function(app, done) {
       var opts = {
-        name: 'kalabox/git:dev',
+        name: 'git',
         srcRoot: path.resolve(__dirname)
       };
       engine.build(opts, done);
