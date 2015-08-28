@@ -8,7 +8,7 @@ module.exports = function(kbox) {
   var events = kbox.core.events;
   var engine = kbox.engine;
 
-  kbox.whenApp(function(app) {
+  kbox.ifApp(function(app) {
 
     // Grab the clients
     var Git = require('./lib/git.js');
