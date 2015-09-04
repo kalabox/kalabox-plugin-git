@@ -28,6 +28,7 @@ module.exports = function(kbox) {
     // git wrapper: kbox git COMMAND
     kbox.tasks.add(function(task) {
       task.path = [app.name, 'git'];
+      task.category = 'appAction';
       task.description = 'Run git commands.';
       task.kind = 'delegate';
       task.options.push(taskOpts.gitUsername);
