@@ -1,9 +1,20 @@
 'use strict';
 
-var path = require('path');
-var taskOpts = require('./lib/tasks.js');
-
 module.exports = function(kbox) {
+
+  var path = require('path');
+  var taskOpts = {
+    gitUsername: {
+      name: 'git-username',
+      kind: 'string',
+      description: 'Your git username.'
+    },
+    gitEmail: {
+      name: 'git-email',
+      kind: 'string',
+      description: 'Your git email.'
+    }
+  };
 
   var events = kbox.core.events;
   var engine = kbox.engine;
